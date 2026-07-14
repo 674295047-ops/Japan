@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>มหัศจรรย์แดนอาทิตย์อุทัย | Discover Japan</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Prompt for Thai readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        'japan-red': '#bc002d',
+                        'sakura': '#ffd1dc',
+                        'sakura-dark': '#ffb7c5',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #fcfcfc;
+        }
+        .hero-bg {
+            background-color: #bc002d;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffb7c5; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bc002d; 
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-3 shadow-md">
+                        <div class="w-6 h-6 bg-japan-red rounded-full"></div>
+                    </div>
+                    <span class="font-bold text-2xl text-white tracking-wider" id="logo-text">JAPAN<span class="text-japan-red font-light">GUIDE</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#overview" class="text-white hover:text-sakura transition px-3 py-2 rounded-md font-medium nav-link">ข้อมูลทั่วไป</a>
+                    <a href="#culture" class="text-white hover:text-sakura transition px-3 py-2 rounded-md font-medium nav-link">วัฒนธรรม</a>
+                    <a href="#destinations" class="text-white hover:text-sakura transition px-3 py-2 rounded-md font-medium nav-link">สถานที่ท่องเที่ยว</a>
+                    <a href="#food" class="text-white hover:text-sakura transition px-3 py-2 rounded-md font-medium nav-link">อาหารญี่ปุ่น</a>
+                    <a href="#booking" class="bg-japan-red text-white px-5 py-2 rounded-full font-medium hover:bg-red-700 transition shadow-lg">วางแผนการเดินทาง</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-sakura focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-xl absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#overview" class="block px-3 py-3 rounded-md text-base font-medium text-gray-800 hover:bg-sakura-dark hover:text-white mobile-link">ข้อมูลทั่วไป</a>
+                <a href="#culture" class="block px-3 py-3 rounded-md text-base font-medium text-gray-800 hover:bg-sakura-dark hover:text-white mobile-link">วัฒนธรรม</a>
+                <a href="#destinations" class="block px-3 py-3 rounded-md text-base font-medium text-gray-800 hover:bg-sakura-dark hover:text-white mobile-link">สถานที่ท่องเที่ยว</a>
+                <a href="#food" class="block px-3 py-3 rounded-md text-base font-medium text-gray-800 hover:bg-sakura-dark hover:text-white mobile-link">อาหารญี่ปุ่น</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-white"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-sakura/20 text-sakura-dark backdrop-blur-sm border border-sakura-dark/30 text-sm font-semibold tracking-wider mb-4">DISCOVER THE BEAUTY</span>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                มหัศจรรย์แดน <br/><span class="text-sakura-dark">อาทิตย์อุทัย</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-200 mb-10 font-light drop-shadow-md">
+                สัมผัสความงดงามของธรรมชาติ ศิลปวัฒนธรรมที่สืบทอดมายาวนาน และนวัตกรรมที่ล้ำสมัย
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#overview" class="bg-japan-red hover:bg-red-700 text-white font-medium py-3 px-8 rounded-full transition duration-300 shadow-lg shadow-red-500/30 flex items-center justify-center">
+                    เริ่มต้นการสำรวจ <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#destinations" class="bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/50 text-white font-medium py-3 px-8 rounded-full transition duration-300 flex items-center justify-center">
+                    ดูสถานที่ไฮไลท์
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10 hidden md:block">
+            <a href="#overview" class="text-white/70 hover:text-white">
+                <i class="fas fa-chevron-down text-3xl"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-japan-red tracking-widest uppercase mb-2">About Japan</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ข้อมูลน่ารู้เกี่ยวกับประเทศญี่ปุ่น</h3>
+                <div class="w-24 h-1 bg-sakura-dark mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-sakura-dark/20 rounded-2xl transform rotate-3"></div>
+                    <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=2092&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/800x600/ffd1dc/bc002d?text=Japan'" alt="Japan Map Concept" class="relative rounded-2xl shadow-xl w-full h-auto object-cover aspect-video">
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold mb-4 text-gray-800">ดินแดนแห่ง 4 ฤดู</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        ประเทศญี่ปุ่นประกอบด้วยเกาะหลัก 4 เกาะ ได้แก่ ฮอกไกโด ฮอนชู ชิโกกุ และคิวชู มีเสน่ห์ที่แตกต่างกันไปในแต่ละฤดูกาล ทำให้สามารถท่องเที่ยวได้ตลอดทั้งปี 
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
+                                    <i class="fas fa-fan"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold text-gray-800">ฤดูใบไม้ผลิ (Spring)</h5>
+                                <p class="text-sm text-gray-500 mt-1">มี.ค. - พ.ค. ชมดอกซากุระบานสะพรั่ง อากาศเย็นสบาย</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold text-gray-800">ฤดูร้อน (Summer)</h5>
+                                <p class="text-sm text-gray-500 mt-1">มิ.ย. - ส.ค. เทศกาลดอกไม้ไฟ และความเขียวขจี</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold text-gray-800">ฤดูใบไม้ร่วง (Autumn)</h5>
+                                <p class="text-sm text-gray-500 mt-1">ก.ย. - พ.ย. ใบไม้เปลี่ยนสีแดงส้มทั่วภูเขา โรแมนติกสุดๆ</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                                    <i class="fas fa-snowflake"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold text-gray-800">ฤดูหนาว (Winter)</h5>
+                                <p class="text-sm text-gray-500 mt-1">ธ.ค. - ก.พ. สัมผัสหิมะ เล่นสกี แช่ออนเซ็นคลายหนาว</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="py-20 bg-gray-50 relative border-t border-gray-200">
+        <!-- Decorative element -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-sakura opacity-20 rounded-bl-full -z-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-japan-red tracking-widest uppercase mb-2">Culture & Etiquette</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">มารยาทและวัฒนธรรมญี่ปุ่น</h3>
+                <div class="w-24 h-1 bg-sakura-dark mx-auto rounded-full mb-6"></div>
+                <p class="max-w-2xl mx-auto text-gray-600">ชาวญี่ปุ่นให้ความสำคัญกับความมีระเบียบวินัยและการเคารพผู้อื่นเป็นอย่างมาก การเรียนรู้วัฒนธรรมเบื้องต้นจะช่วยให้การท่องเที่ยวของคุณสนุกและราบรื่นยิ่งขึ้น</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Culture Item 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-japan-red transition-colors duration-300">
+                        <i class="fas fa-clock text-3xl text-gray-600 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">การตรงต่อเวลา</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        คนญี่ปุ่นให้ความสำคัญกับเวลามาก ระบบขนส่งสาธารณะเช่นรถไฟมาตรงเวลาเป๊ะ การนัดหมายต่างๆ ควรไปถึงก่อนเวลาอย่างน้อย 5-10 นาที
+                    </p>
+                </div>
+
+                <!-- Culture Item 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-japan-red transition-colors duration-300">
+                        <i class="fas fa-subway text-3xl text-gray-600 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">มารยาทบนรถสาธารณะ</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        งดคุยโทรศัพท์หรือเปิดเสียงดังบนรถไฟ หากจำเป็นให้พูดเบาที่สุด ควรปิดเสียงมือถือ และไม่ควรนั่งในที่นั่งสำรอง (Priority Seat) หากไม่จำเป็น
+                    </p>
+                </div>
+
+                <!-- Culture Item 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-japan-red transition-colors duration-300">
+                        <i class="fas fa-users text-3xl text-gray-600 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">การเข้าคิว</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        การต่อแถวเป็นเรื่องปกติมากในญี่ปุ่น ไม่ว่าจะเป็นรอรถไฟ เข้าห้องน้ำ หรือซื้อของ ห้ามแซงคิวเด็ดขาดเพราะถือเป็นเรื่องที่เสียมารยาทรุนแรง
+                    </p>
+                </div>
+
+                <!-- Culture Item 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-japan-red transition-colors duration-300">
+                        <i class="fas fa-hot-tub text-3xl text-gray-600 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">การแช่ออนเซ็น</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        ต้องอาบน้ำชำระล้างร่างกายให้สะอาดก่อนลงบ่อเสมอ ห้ามสวมใส่เสื้อผ้าหรือชุดว่ายน้ำลงบ่อ และห้ามนำผ้าขนหนูผืนใหญ่จุ่มลงไปในน้ำเด็ดขาด
+                    </p>
+                </div>
+
+                <!-- Culture Item 5 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-japan-red transition-colors duration-300">
+                        <i class="fas fa-mug-hot text-3xl text-gray-600 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">พิธีชงชา (ซะโด)</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        ศิลปะแห่งความสงบที่สะท้อนความประณีตของชาวญี่ปุ่น แฝงปรัชญา "อิจิโกะ อิจิเอะ" (การพบกันครั้งเดียวในชีวิต) เป็นประสบการณ์ที่ไม่ควรพลาด
+                    </p>
+                </div>
+
+                <!-- Culture Item 6 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-japan-red transition-colors duration-300">
+                        <i class="fas fa-money-bill-wave text-3xl text-gray-600 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">ไม่มีธรรมเนียมให้ทิป</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        การบริการที่ดีถือเป็นมาตรฐานและหน้าที่ของพนักงานในญี่ปุ่น การให้ทิปอาจทำให้พนักงานสับสนหรือวิ่งตามเพื่อคืนเงินให้คุณได้
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-japan-red tracking-widest uppercase mb-2">Top Destinations</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">เมืองท่องเที่ยวยอดฮิต</h3>
+                <div class="w-24 h-1 bg-sakura-dark mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tokyo -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2094&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/eee/bc002d?text=Tokyo'" alt="Tokyo Shibuya" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h4 class="text-2xl font-bold text-white mb-1">โตเกียว (Tokyo)</h4>
+                            <p class="text-sakura-dark text-sm"><i class="fas fa-map-marker-alt mr-1"></i> มหานครแห่งสีสัน</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <p class="text-gray-600 text-sm mb-4">
+                            เมืองหลวงที่ผสมผสานความล้ำสมัยทางเทคโนโลยีเข้ากับวัดและศาลเจ้าดั้งเดิม ไฮไลท์ได้แก่ ห้าแยกชิบูย่า, วัดเซ็นโซจิ (อาซากุสะ), และแหล่งช้อปปิ้งชินจูกุ
+                        </p>
+                        <button class="text-japan-red font-medium text-sm hover:text-red-700 flex items-center">
+                            ดูข้อมูลเพิ่มเติม <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kyoto -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?q=80&w=1953&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/eee/bc002d?text=Kyoto'" alt="Kyoto Temple" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h4 class="text-2xl font-bold text-white mb-1">เกียวโต (Kyoto)</h4>
+                            <p class="text-sakura-dark text-sm"><i class="fas fa-map-marker-alt mr-1"></i> เมืองหลวงเก่าสุดคลาสสิก</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <p class="text-gray-600 text-sm mb-4">
+                            ศูนย์รวมประวัติศาสตร์กว่าพันปี เต็มไปด้วยศาลเจ้าและวัดที่สวยงาม ไฮไลท์คือ ศาลเจ้าฟุชิมิอินาริ (เสาโทริอิแดง), วัดคินคะคุจิ (วัดทอง), และป่าไผ่อาราชิยาม่า
+                        </p>
+                        <button class="text-japan-red font-medium text-sm hover:text-red-700 flex items-center">
+                            ดูข้อมูลเพิ่มเติม <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Osaka -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1590559899731-a382839cecdf?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/eee/bc002d?text=Osaka'" alt="Osaka Dotonbori" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h4 class="text-2xl font-bold text-white mb-1">โอซาก้า (Osaka)</h4>
+                            <p class="text-sakura-dark text-sm"><i class="fas fa-map-marker-alt mr-1"></i> ครัวของชาติ</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <p class="text-gray-600 text-sm mb-4">
+                            โดดเด่นเรื่องสีสันยามค่ำคืน อาหารอร่อยสไตล์สตรีทฟู้ด และผู้คนที่เป็นมิตร ไฮไลท์คือ ป้ายกูลิโกะที่โดทงโบริ, ปราสาทโอซาก้า, และสวนสนุก USJ
+                        </p>
+                        <button class="text-japan-red font-medium text-sm hover:text-red-700 flex items-center">
+                            ดูข้อมูลเพิ่มเติม <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                 <!-- Hokkaido -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1510255959145-728b7e80f4f9?q=80&w=2069&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/eee/bc002d?text=Hokkaido'" alt="Hokkaido Winter" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h4 class="text-2xl font-bold text-white mb-1">ฮอกไกโด (Hokkaido)</h4>
+                            <p class="text-sakura-dark text-sm"><i class="fas fa-map-marker-alt mr-1"></i> สวรรค์แห่งธรรมชาติ</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <p class="text-gray-600 text-sm mb-4">
+                            เกาะเหนือสุดของญี่ปุ่น ขึ้นชื่อเรื่องหิมะที่นุ่มละเอียด ซีฟู้ดสดใหม่ ทุ่งดอกลาเวนเดอร์ในหน้าร้อน และลานสกีระดับโลก
+                        </p>
+                        <button class="text-japan-red font-medium text-sm hover:text-red-700 flex items-center">
+                            ดูข้อมูลเพิ่มเติม <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Nara -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571439223784-297eb0981b2a?q=80&w=1964&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/eee/bc002d?text=Nara'" alt="Nara Deer" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h4 class="text-2xl font-bold text-white mb-1">นารา (Nara)</h4>
+                            <p class="text-sakura-dark text-sm"><i class="fas fa-map-marker-alt mr-1"></i> เมืองแห่งกวางศักดิ์สิทธิ์</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <p class="text-gray-600 text-sm mb-4">
+                            อดีตเมืองหลวงแห่งแรกๆ ของญี่ปุ่น มีชื่อเสียงจากสวนนาราที่มีกวางเดินอย่างอิสระ และวัดโทไดจิซึ่งประดิษฐานพระพุทธรูปองค์ใหญ่
+                        </p>
+                        <button class="text-japan-red font-medium text-sm hover:text-red-700 flex items-center">
+                            ดูข้อมูลเพิ่มเติม <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mount Fuji -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542051812891-b99793108c90?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/eee/bc002d?text=Mt+Fuji'" alt="Fuji Mountain" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h4 class="text-2xl font-bold text-white mb-1">ฟูจิซัง (Mt. Fuji)</h4>
+                            <p class="text-sakura-dark text-sm"><i class="fas fa-map-marker-alt mr-1"></i> สัญลักษณ์แห่งญี่ปุ่น</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <p class="text-gray-600 text-sm mb-4">
+                            ภูเขาที่สูงที่สุดและสวยงามที่สุดในญี่ปุ่น สามารถชมวิวสวยๆ ได้จากทะเลสาบทั้งห้า (Fuji Five Lakes) หรือฮาโกเน่
+                        </p>
+                        <button class="text-japan-red font-medium text-sm hover:text-red-700 flex items-center">
+                            ดูข้อมูลเพิ่มเติม <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Section -->
+    <section id="food" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-sm font-bold text-japan-red tracking-widest uppercase mb-2">Japanese Cuisine</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">อาหารญี่ปุ่นที่ไม่ควรพลาด</h3>
+                    <div class="w-24 h-1 bg-sakura-dark mt-4 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 max-w-md mt-4 md:mt-0 text-sm md:text-right">
+                    อาหารญี่ปุ่นได้รับการขึ้นทะเบียนเป็นมรดกทางวัฒนธรรมที่จับต้องไม่ได้ของยูเนสโก (Washoku) เน้นความสดใหม่และรสชาติจากวัตถุดิบธรรมชาติ
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <!-- Food 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/400x300/eee/bc002d?text=Sushi'" alt="Sushi" class="w-full h-40 object-cover">
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-gray-900">ซูชิ (Sushi)</h4>
+                        <p class="text-xs text-gray-500 mt-1">ข้าวปั้นหน้าปลาดิบ ศิลปะแห่งความสดใหม่</p>
+                    </div>
+                </div>
+
+                <!-- Food 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://images.unsplash.com/photo-1557872943-16a5ac26437e?q=80&w=2031&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/400x300/eee/bc002d?text=Ramen'" alt="Ramen" class="w-full h-40 object-cover">
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-gray-900">ราเมน (Ramen)</h4>
+                        <p class="text-xs text-gray-500 mt-1">บะหมี่น้ำซุปเข้มข้น หลากหลายสูตรตามภูมิภาค</p>
+                    </div>
+                </div>
+
+                <!-- Food 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://images.unsplash.com/photo-1615361200141-f45040f367be?q=80&w=1964&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/400x300/eee/bc002d?text=Tempura'" alt="Tempura" class="w-full h-40 object-cover">
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-gray-900">เทมปุระ (Tempura)</h4>
+                        <p class="text-xs text-gray-500 mt-1">อาหารชุบแป้งทอด กรอบเบา ไม่อมน้ำมัน</p>
+                    </div>
+                </div>
+
+                <!-- Food 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://images.unsplash.com/photo-1614563637806-1d0e645e0940?q=80&w=1973&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/400x300/eee/bc002d?text=Takoyaki'" alt="Takoyaki" class="w-full h-40 object-cover">
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-gray-900">ทาโกะยากิ (Takoyaki)</h4>
+                        <p class="text-xs text-gray-500 mt-1">ขนมครกญี่ปุ่นไส้ปลาหมึกยักษ์ สตรีทฟู้ดสุดฮิต</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="bg-white border-2 border-japan-red text-japan-red font-medium py-2 px-6 rounded-full hover:bg-japan-red hover:text-white transition duration-300">
+                    ดูเมนูอาหารเพิ่มเติม
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                            <div class="w-4 h-4 bg-japan-red rounded-full"></div>
+                        </div>
+                        <span class="font-bold text-xl tracking-wider">JAPAN<span class="text-japan-red font-light">GUIDE</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        เว็บไซต์รวบรวมข้อมูลการท่องเที่ยว วัฒนธรรม และสาระน่ารู้เกี่ยวกับประเทศญี่ปุ่น เพื่อเป็นแนวทางสำหรับนักท่องเที่ยวมือใหม่และผู้ที่สนใจ
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-gray-700 pb-2">ลิงก์ที่เป็นประโยชน์</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-sakura-dark transition"><i class="fas fa-angle-right mr-2"></i>ข้อควรรู้ก่อนไปญี่ปุ่น</a></li>
+                        <li><a href="#" class="hover:text-sakura-dark transition"><i class="fas fa-angle-right mr-2"></i>การขอวีซ่าญี่ปุ่น</a></li>
+                        <li><a href="#" class="hover:text-sakura-dark transition"><i class="fas fa-angle-right mr-2"></i>การใช้ตั๋ว JR Pass</a></li>
+                        <li><a href="#" class="hover:text-sakura-dark transition"><i class="fas fa-angle-right mr-2"></i>ฤดูกาลและสภาพอากาศ</a></li>
+                        <li><a href="#" class="hover:text-sakura-dark transition"><i class="fas fa-angle-right mr-2"></i>สกุลเงินและการใช้จ่าย</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-gray-700 pb-2">รับข่าวสาร</h4>
+                    <p class="text-gray-400 text-sm mb-4">สมัครรับอีเมลเพื่อรับโปรโมชั่นตั๋วเครื่องบินและอัพเดทข่าวสารท่องเที่ยวญี่ปุ่น</p>
+                    <form class="flex" onsubmit="event.preventDefault(); showMessageBox('ขอบคุณที่สมัครรับข่าวสาร! เราจะส่งข้อมูลอัพเดทไปที่อีเมลของคุณ');">
+                        <input type="email" placeholder="อีเมลของคุณ..." class="px-4 py-2 w-full text-gray-900 rounded-l-md focus:outline-none" required>
+                        <button type="submit" class="bg-japan-red hover:bg-red-700 px-4 py-2 rounded-r-md transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 Japan Guide Project. All rights reserved. (Demo by Gemini)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Message Box for interactive elements (replacing alert) -->
+    <div id="custom-message-box" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="bg-white rounded-xl p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="message-box-content">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">สำเร็จ!</h3>
+                <p class="text-gray-600 mb-6" id="message-text">ข้อความ...</p>
+                <button onclick="closeMessageBox()" class="w-full bg-japan-red text-white py-2 rounded-lg font-medium hover:bg-red-700 transition">
+                    ตกลง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts for interaction -->
+    <script>
+        // DOM Elements
+        const navbar = document.getElementById('navbar');
+        const logoText = document.getElementById('logo-text');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-md');
+                navbar.classList.remove('bg-transparent');
+                
+                logoText.classList.remove('text-white');
+                logoText.classList.add('text-gray-900');
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-gray-800');
+                });
+                
+                mobileBtn.classList.remove('text-white');
+                mobileBtn.classList.add('text-gray-800');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-md');
+                navbar.classList.add('bg-transparent');
+                
+                logoText.classList.add('text-white');
+                logoText.classList.remove('text-gray-900');
+                
+                navLinks.forEach(link => {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-gray-800');
+                });
+                
+                mobileBtn.classList.add('text-white');
+                mobileBtn.classList.remove('text-gray-800');
+            }
+        });
+
+        // Mobile Menu Toggle
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Custom Message Box Logic
+        const msgBox = document.getElementById('custom-message-box');
+        const msgBoxContent = document.getElementById('message-box-content');
+        const msgText = document.getElementById('message-text');
+
+        function showMessageBox(message) {
+            msgText.textContent = message;
+            msgBox.classList.remove('hidden');
+            msgBox.classList.add('flex');
+            
+            // Small delay to allow display:flex to apply before animating opacity/scale
+            setTimeout(() => {
+                msgBoxContent.classList.remove('scale-95', 'opacity-0');
+                msgBoxContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeMessageBox() {
+            msgBoxContent.classList.remove('scale-100', 'opacity-100');
+            msgBoxContent.classList.add('scale-95', 'opacity-0');
+            
+            // Wait for transition to finish before hiding
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+                msgBox.classList.remove('flex');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
